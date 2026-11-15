@@ -32,6 +32,13 @@
         that could be opened in a browser, which made it easier to spot problems early.
       </p>
 
+      <p class="meta">
+        Note on version control: I did not create the repository on day one. I built the pages in a
+        local folder first and only set up Git at the end, so every commit was made in one session on
+        15 November 2026. The weeks below are when the work was actually done; the commit history
+        does not show that. It is the main thing I would change next time.
+      </p>
+
       <div class="table-wrap">
         <table>
           <caption>Agile sprint plan mapped to the system development life cycle</caption>
@@ -103,7 +110,7 @@
 
       <article class="error-entry">
         <h3>Error 1: impossible dates were accepted by the validator</h3>
-        <p class="meta">Found on 9 November 2026, around 21:40, while testing the due date field.</p>
+        <p class="meta">Found while testing the due date field in the second week of the build.</p>
 
         <p>
           Typing or scripting a date such as <code>2026-02-31</code> was accepted. JavaScript's
@@ -148,7 +155,7 @@ validation result: accepted (no errors)</code></pre>
 
       <article class="error-entry">
         <h3>Error 2: the delete button did nothing at all</h3>
-        <p class="meta">Found on 10 November 2026, around 19:15, after adding the delete feature.</p>
+        <p class="meta">Found straight after adding the delete feature, also in the second week.</p>
 
         <p>
           Clicking Delete did not open the confirmation dialog and no error appeared on screen. The
@@ -185,7 +192,8 @@ deleteButton.addEventListener("click", function () {
       <p>
         Testing each feature as soon as it was finished would have caught both bugs earlier. The
         date bug in particular would never have appeared if I had tested one impossible date before
-        moving on.
+        moving on. Setting up Git before writing the first line of code would also have left a real
+        commit history, instead of one afternoon of catch up commits at the end.
       </p>
     </section>
   </main>
