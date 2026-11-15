@@ -1,6 +1,6 @@
 # Study Task Manager
 
-> TODO: replace `<your-github-username>` and `<repo-name>` with your GitHub Classroom repository details.
+Repository: https://github.com/Ziyue-student/ITS_3.1_StudyTask
 
 ## Overview
 
@@ -9,7 +9,7 @@ Brief description of the application (what it does, who it is for).
 ## Installation and Running
 
 1. Clone the repository:
-   `git clone https://github.com/<your-github-username>/<repo-name>.git`
+   `git clone https://github.com/Ziyue-student/ITS_3.1_StudyTask.git`
 2. Open `index.html` in a web browser, or serve the folder locally.
 
 ## Usage Guide
@@ -47,4 +47,4 @@ TODO
 
 ## Repository
 
-- GitHub repository: TODO
+- GitHub repository: https://github.com/Ziyue-student/ITS_3.1_StudyTask
