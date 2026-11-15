@@ -47,9 +47,9 @@
   }
 
   var images = [
-    { file: "study-1.jpg", alt: "A student planning the week in a paper planner" },
-    { file: "study-2.jpg", alt: "A laptop with a list of assignments on the screen" },
-    { file: "study-3.jpg", alt: "Notes and highlighted reading on a study desk" }
+    { file: "hero-tasks.svg", alt: "Illustration of a task list window with completed and pending tasks" },
+    { file: "hero-planner.svg", alt: "Illustration of a weekly planner with highlighted due dates" },
+    { file: "hero-progress.svg", alt: "Illustration of progress bars and a completion ring" }
   ];
 
   var currentIndex = 0;

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" aria-label="Flat illustration of progress bars and a completion ring">
+  <title>Progress illustration</title>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="#eaf1f6"/>
+
+  <!-- Panel shadow -->
+  <rect x="96" y="72" width="608" height="306" rx="18" fill="#cad9e6" opacity="0.5"/>
+  <rect x="88" y="64" width="608" height="306" rx="18" fill="#ffffff"/>
+
+  <!-- Header -->
+  <rect x="126" y="98" width="168" height="14" rx="7" fill="#8fa6b8"/>
+  <rect x="126" y="122" width="104" height="10" rx="5" fill="#c9d9e6"/>
+
+  <!-- Bar 1 -->
+  <rect x="126" y="164" width="392" height="18" rx="9" fill="#eef3f7"/>
+  <rect x="126" y="164" width="350" height="18" rx="9" fill="#1f5f8b"/>
+  <circle cx="476" cy="173" r="13" fill="#1f5f8b"/>
+  <circle cx="476" cy="173" r="13" fill="#ffffff" opacity="0.25"/>
+  <rect x="126" y="190" width="120" height="8" rx="4" fill="#c9d9e6"/>
+
+  <!-- Bar 2 -->
+  <rect x="126" y="222" width="392" height="18" rx="9" fill="#eef3f7"/>
+  <rect x="126" y="222" width="236" height="18" rx="9" fill="#d97706"/>
+  <circle cx="362" cy="231" r="13" fill="#d97706"/>
+  <circle cx="362" cy="231" r="13" fill="#ffffff" opacity="0.25"/>
+  <rect x="126" y="248" width="154" height="8" rx="4" fill="#c9d9e6"/>
+
+  <!-- Bar 3 -->
+  <rect x="126" y="280" width="392" height="18" rx="9" fill="#eef3f7"/>
+  <rect x="126" y="280" width="118" height="18" rx="9" fill="#17724a"/>
+  <circle cx="244" cy="289" r="13" fill="#17724a"/>
+  <circle cx="244" cy="289" r="13" fill="#ffffff" opacity="0.25"/>
+  <rect x="126" y="306" width="96" height="8" rx="4" fill="#c9d9e6"/>
+
+  <!-- Completion ring -->
+  <g transform="translate(608 236)">
+    <circle r="62" fill="none" stroke="#eef3f7" stroke-width="16"/>
+    <circle r="62" fill="none" stroke="#1f5f8b" stroke-width="16" stroke-linecap="round"
+            stroke-dasharray="272 390" transform="rotate(-90)"/>
+    <circle r="62" fill="none" stroke="#d97706" stroke-width="16" stroke-linecap="round"
+            stroke-dasharray="52 390" stroke-dashoffset="-272" transform="rotate(-90)"/>
+    <rect x="-26" y="-8" width="52" height="14" rx="7" fill="#8fa6b8"/>
+    <rect x="-16" y="8" width="32" height="8" rx="4" fill="#c9d9e6"/>
+  </g>
+</svg>

@@ -133,7 +133,8 @@ ITS_3.1_StudyTask/
 - Assignment brief and marking rubric: Information Technology Systems (INFO1012), Adelaide
   University.
 - Colour palette and layout inspired by the course practical examples.
-- Photographs on the home page were generated for this project.
+- The three illustrations on the home page are SVG files drawn by hand for this project, so every
+  shape and colour can be edited in a text editor.
 
 ## Licence
 
