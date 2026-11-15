@@ -3,23 +3,132 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create, edit and delete your study tasks.">
   <title>Tasks | Study Task Manager</title>
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-  <!-- TODO: same header/navigation as index.html -->
+  <header class="site-header">
+    <a class="brand" href="../index.html">Study Task Manager</a>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="tasks.html" aria-current="page">Tasks</a></li>
+        <li><a href="blog.html">Project Blog</a></li>
+        <li><a href="ethics.html">Ethics &amp; Privacy</a></li>
+      </ul>
+    </nav>
+  </header>
 
   <main>
-    <!-- TODO: login form (username + password) -->
-    <!-- TODO: task form (title, course code/name, due date, description, notes) -->
-    <!-- TODO: task list / table -->
-    <!-- TODO: edit + delete (with confirm dialog) -->
+    <h1>My tasks</h1>
+
+    <!-- Login gate: the task list stays hidden until the user signs in. -->
+    <section class="panel narrow" id="loginSection">
+      <h2>Sign in</h2>
+      <p>Use the demo account to open your task list.</p>
+
+      <p class="message" id="loginMessage" role="alert"></p>
+
+      <form id="loginForm" novalidate>
+        <div class="form-grid">
+          <div class="field full">
+            <label for="username">Username <span class="required">*</span></label>
+            <input type="text" id="username" name="username" autocomplete="username" placeholder="student">
+          </div>
+          <div class="field full">
+            <label for="password">Password <span class="required">*</span></label>
+            <input type="password" id="password" name="password" autocomplete="current-password" placeholder="Your password">
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="button">Sign in</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Task application: hidden by default, shown by js/tasks.js after login. -->
+    <section id="taskApp" hidden>
+      <div class="banner">
+        <p id="welcomeText">Signed in.</p>
+        <button type="button" class="button secondary small" id="logoutButton">Sign out</button>
+      </div>
+
+      <section class="panel">
+        <h2 id="formHeading">Add a task</h2>
+
+        <p class="message" id="formMessage" role="alert"></p>
+
+        <form id="taskForm" novalidate>
+          <!-- Stores the id of the task being edited; empty when adding a new task. -->
+          <input type="hidden" id="taskId" name="taskId" value="">
+
+          <div class="form-grid">
+            <div class="field full">
+              <label for="taskTitle">Task title <span class="required">*</span></label>
+              <input type="text" id="taskTitle" name="taskTitle" placeholder="Finish the web page assignment">
+            </div>
+
+            <div class="field">
+              <label for="courseName">Course code / name <span class="required">*</span></label>
+              <input type="text" id="courseName" name="courseName" placeholder="INFO1012 Information Technology Systems">
+            </div>
+
+            <div class="field">
+              <label for="dueDate">Due date <span class="required">*</span></label>
+              <input type="date" id="dueDate" name="dueDate">
+            </div>
+
+            <div class="field full">
+              <label for="taskDescription">Description <span class="required">*</span></label>
+              <textarea id="taskDescription" name="taskDescription" placeholder="What needs to be done?"></textarea>
+            </div>
+
+            <div class="field full">
+              <label for="taskNotes">Notes</label>
+              <textarea id="taskNotes" name="taskNotes" placeholder="Optional: links, questions, reminders"></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="button" id="submitButton">Add task</button>
+            <button type="button" class="button secondary" id="cancelEditButton" hidden>Cancel edit</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>All tasks</h2>
+        <p class="meta" id="taskCount">No tasks yet.</p>
+
+        <div class="table-wrap">
+          <table id="taskTable" hidden>
+            <caption>Tasks are ordered by due date, earliest first.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Course</th>
+                <th scope="col">Due date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Notes</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="taskBody"></tbody>
+          </table>
+        </div>
+
+        <p class="empty-state" id="emptyState">Your task list is empty. Add your first task above.</p>
+      </section>
+    </section>
   </main>
 
-  <footer>
-    <!-- TODO: current date and time -->
+  <footer class="site-footer">
+    <p>&copy; 2026 Study Task Manager</p>
+    <p id="currentDateTime" class="datetime"></p>
   </footer>
 
+  <script src="../js/app.js"></script>
   <script src="../js/tasks.js"></script>
 </body>
 </html>
