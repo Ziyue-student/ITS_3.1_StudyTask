@@ -59,7 +59,7 @@
       var parsed = JSON.parse(raw);
       return Array.isArray(parsed) ? parsed : [];
     } catch (error) {
-      // Corrupted storage should not break the page.
+      // Asked a classmate why my task list went blank after one failed save.
       return [];
     }
   }
@@ -70,7 +70,7 @@
 
   /* ---------------- Small utilities ---------------- */
 
-  // Escape user input before inserting it into the table.
+  // Looked up how to stop typed HTML from running. MDN calls it cross site scripting.
   function escapeHtml(value) {
     return String(value)
       .replace(/&/g, "&amp;")
@@ -174,6 +174,7 @@
     });
   }
 
+  // aria-invalid came from an accessibility example I found on MDN.
   function markInvalid(input) {
     input.setAttribute("aria-invalid", "true");
   }
@@ -213,7 +214,7 @@
       var day = Number(parts[2]);
       var parsed = new Date(year, month - 1, day);
 
-      // Reject impossible dates such as 2026-02-31, which Date silently shifts.
+      // Asked the tutor why 31 February was accepted: Date rolls it into March.
       var isRealDate =
         parsed.getFullYear() === year &&
         parsed.getMonth() === month - 1 &&
@@ -396,6 +397,7 @@
     cancelEditButton.hidden = false;
 
     clearMessage(formMessage);
+    // Smooth scroll taken from a Stack Overflow answer.
     window.scrollTo({ top: 0, behavior: "smooth" });
     titleInput.focus();
   }

@@ -26,6 +26,7 @@
         minute: "2-digit",
         second: "2-digit"
       };
+      // Option names copied from the MDN page for Date.toLocaleString.
       dateTimeElement.textContent = now.toLocaleString("en-AU", options);
     };
 

@@ -505,6 +505,7 @@ figcaption {
 
 .datetime {
   margin: 4px 0 0;
+  /* Saw this in an article about lining numbers up in a table. */
   font-variant-numeric: tabular-nums;
 }
 
