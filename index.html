@@ -3,26 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Study Task Manager</title>
+  <meta name="description" content="Study Task Manager - a simple web app for tracking university study tasks.">
+  <title>Study Task Manager | Home</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- TODO: header + navigation -->
-  <header>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="pages/tasks.html">Tasks</a>
-      <a href="pages/blog.html">Project Blog</a>
-      <a href="pages/ethics.html">Ethics &amp; Privacy</a>
+  <!-- Site header with the main navigation. The current page is marked with aria-current. -->
+  <header class="site-header">
+    <a class="brand" href="index.html">Study Task Manager</a>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="pages/tasks.html">Tasks</a></li>
+        <li><a href="pages/blog.html">Project Blog</a></li>
+        <li><a href="pages/ethics.html">Ethics &amp; Privacy</a></li>
+      </ul>
     </nav>
   </header>
 
   <main>
-    <!-- TODO: app name, 3 switchable images, About the app, About me -->
+    <!-- Hero section: app name, short pitch, and an image switcher with three images. -->
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Study Task Manager</h1>
+        <p class="tagline">One place to record every assignment, its due date and how far you have got.</p>
+        <p class="hero-actions">
+          <a class="button" href="pages/tasks.html">Open my tasks</a>
+        </p>
+      </div>
+
+      <div class="slider" aria-roledescription="carousel" aria-label="Study Task Manager preview images">
+        <img id="heroImage" src="images/study-1.jpg" alt="A student planning the week in a paper planner">
+
+        <div class="slider-controls">
+          <button type="button" id="prevImage" class="slider-button" aria-label="Show previous image">&#10094;</button>
+          <button type="button" id="nextImage" class="slider-button" aria-label="Show next image">&#10095;</button>
+        </div>
+
+        <div class="slider-dots" id="sliderDots" role="tablist" aria-label="Choose image"></div>
+      </div>
+    </section>
+
+    <!-- About the app: what it does and who it is for. -->
+    <section class="panel" id="about-app">
+      <h2>About the app</h2>
+      <p>
+        Study Task Manager is a small web application built for university students who need to keep
+        several subjects moving at the same time. Each task stores a title, the course it belongs to,
+        a due date, a description and personal notes.
+      </p>
+      <p>
+        The application runs entirely in the browser. Tasks are saved in the browser's local storage,
+        so they are still there after the page is reloaded, and no account or server is required.
+      </p>
+
+      <ul class="feature-list">
+        <li>Sign in before your task list is shown.</li>
+        <li>Create, edit and delete tasks, with a confirmation step before deleting.</li>
+        <li>Validation that blocks empty required fields and impossible due dates.</li>
+        <li>Every page shows the current date and time in the footer.</li>
+      </ul>
+    </section>
+
+    <!-- About me: short personal introduction required by the brief. -->
+    <section class="panel" id="about-me">
+      <h2>About me</h2>
+      <p>
+        My name is Ziyue and I am a first year Information Technology student. I built this
+        application for the Information Technology Systems web page development assignment so that I
+        could practise HTML, CSS and JavaScript in a project that I would actually use.
+      </p>
+      <p>
+        Most of my study time disappears into checking five different course sites. Building a single
+        list that shows what is due next has already helped me plan my week.
+      </p>
+    </section>
   </main>
 
-  <footer>
-    <!-- TODO: current date and time -->
+  <footer class="site-footer">
+    <p>&copy; 2026 Study Task Manager</p>
+    <!-- Filled in by js/app.js with the live date and time. -->
+    <p id="currentDateTime" class="datetime"></p>
   </footer>
 
   <script src="js/app.js"></script>
