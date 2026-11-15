@@ -3,19 +3,196 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Three week Agile plan and the development errors that were found and fixed.">
   <title>Project Blog | Study Task Manager</title>
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-  <!-- TODO: same header/navigation as index.html -->
+  <header class="site-header">
+    <a class="brand" href="../index.html">Study Task Manager</a>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="tasks.html">Tasks</a></li>
+        <li><a href="blog.html" aria-current="page">Project Blog</a></li>
+        <li><a href="ethics.html">Ethics &amp; Privacy</a></li>
+      </ul>
+    </nav>
+  </header>
 
   <main>
-    <!-- TODO: Agile 3-week sprint plan (table: Planning / Analysis / Design / Implementation / Testing & Maintenance) -->
-    <!-- TODO: at least 2 development errors, each with date+time, screenshot, faulty code snippet, fix -->
+    <h1>Project blog</h1>
+    <p class="meta">Development diary for the Study Task Manager, written while building the application.</p>
+
+    <!-- ============ Sprint plan ============ -->
+    <section class="panel">
+      <h2>Three week Agile sprint plan</h2>
+      <p>
+        The project was delivered in three one week sprints. Each sprint finished with something
+        that could be opened in a browser, which made it easier to spot problems early.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Agile sprint plan mapped to the system development life cycle</caption>
+          <thead>
+            <tr>
+              <th scope="col">Sprint</th>
+              <th scope="col">Phase</th>
+              <th scope="col">Activities</th>
+              <th scope="col">Deliverable</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Week 1</td>
+              <td>Planning and analysis</td>
+              <td>
+                Wrote the list of required pages, reviewed the assignment brief and drew the task
+                data model (title, course, due date, description, notes).
+              </td>
+              <td>Page skeleton and agreed feature list</td>
+            </tr>
+            <tr>
+              <td>Week 1</td>
+              <td>Design</td>
+              <td>
+                Chose a colour palette, a two column hero layout and a table layout for the task
+                list. Sketched the login gate and the add task form.
+              </td>
+              <td>Written layout plan and stylesheet structure</td>
+            </tr>
+            <tr>
+              <td>Week 2</td>
+              <td>Implementation</td>
+              <td>
+                Built the home page and image switcher, then the task form, the table and local
+                storage persistence.
+              </td>
+              <td>Working task manager with add and delete</td>
+            </tr>
+            <tr>
+              <td>Week 2</td>
+              <td>Implementation</td>
+              <td>
+                Added edit mode, validation messages and the overdue / due soon status labels.
+              </td>
+              <td>Complete create, read, update and delete features</td>
+            </tr>
+            <tr>
+              <td>Week 3</td>
+              <td>Testing and maintenance</td>
+              <td>
+                Tested invalid dates, empty fields, deleting a task that does not exist and
+                reloading the page. Fixed the two bugs described below and re-tested in Chrome and
+                Edge.
+              </td>
+              <td>Final website, README and this blog</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ Error log ============ -->
+    <section class="panel">
+      <h2>Development errors and how I fixed them</h2>
+      <p>
+        Each entry records what went wrong, the faulty code, and the change that fixed it.
+      </p>
+
+      <article class="error-entry">
+        <h3>Error 1: impossible dates were accepted by the validator</h3>
+        <p class="meta">Found on 9 November 2026, around 21:40, while testing the due date field.</p>
+
+        <p>
+          Typing or scripting a date such as <code>2026-02-31</code> was accepted. JavaScript's
+          <code>Date</code> object silently rolls an impossible day forward into the next month, so
+          the check passed even though the user never picked a real date.
+        </p>
+
+        <pre><code>var parsed = new Date(values.dueDate);
+
+// NaN is the only case this catches, so 2026-02-31 still passes.
+if (isNaN(parsed.getTime())) {
+  errors.push("Due date is not a valid date.");
+}</code></pre>
+
+        <p><strong>Cause:</strong> <code>new Date("2026-02-31")</code> produces 3 March 2026 instead of
+          an invalid date, so a simple <code>isNaN</code> test is not enough.</p>
+
+        <p><strong>Fix:</strong> build the date from its parts and compare the parts back again.</p>
+
+        <pre><code>var parts = values.dueDate.split("-");
+var year = Number(parts[0]);
+var month = Number(parts[1]);
+var day = Number(parts[2]);
+var parsed = new Date(year, month - 1, day);
+
+var isRealDate =
+  parsed.getFullYear() === year &amp;&amp;
+  parsed.getMonth() === month - 1 &amp;&amp;
+  parsed.getDate() === day;
+
+if (!isRealDate) {
+  errors.push("Due date is not a real calendar date.");
+}</code></pre>
+
+        <figure>
+          <img src="../docs/error-1.png" alt="Browser console showing the date validation bug before the fix">
+          <figcaption>Screenshot: the console output that showed 31 February being accepted.</figcaption>
+        </figure>
+      </article>
+
+      <article class="error-entry">
+        <h3>Error 2: the delete button did nothing at all</h3>
+        <p class="meta">Found on 10 November 2026, around 19:15, after adding the delete feature.</p>
+
+        <p>
+          Clicking Delete did not open the confirmation dialog and no error appeared on screen. The
+          console reported that <code>deleteTask</code> was not defined.
+        </p>
+
+        <pre><code>// Inside the render loop
+row.innerHTML =
+  "&lt;td&gt;" + task.title + "&lt;/td&gt;" +
+  "&lt;td&gt;&lt;button onclick='deleteTask(" + task.id + ")'&gt;Delete&lt;/button&gt;&lt;/td&gt;";</code></pre>
+
+        <p><strong>Cause:</strong> the code ran inside an immediately invoked function, so
+          <code>deleteTask</code> was not a global function and the inline <code>onclick</code>
+          attribute could not see it.</p>
+
+        <p><strong>Fix:</strong> create the button, then attach the listener with
+          <code>addEventListener</code> so it keeps access to the function's scope.</p>
+
+        <pre><code>var deleteButton = row.querySelector('[data-action="delete"]');
+
+deleteButton.addEventListener("click", function () {
+  deleteTask(task.id);
+});</code></pre>
+
+        <figure>
+          <img src="../docs/error-2.png" alt="Browser console showing deleteTask is not defined">
+          <figcaption>Screenshot: the console error that led to the fix.</figcaption>
+        </figure>
+      </article>
+    </section>
+
+    <section class="panel">
+      <h2>What I would do differently</h2>
+      <p>
+        Testing each feature as soon as it was finished would have caught both bugs earlier. The
+        date bug in particular would never have appeared if I had tested one impossible date before
+        moving on.
+      </p>
+    </section>
   </main>
 
-  <footer>
-    <!-- TODO: current date and time -->
+  <footer class="site-footer">
+    <p>&copy; 2026 Study Task Manager</p>
+    <p id="currentDateTime" class="datetime"></p>
   </footer>
+
+  <script src="../js/app.js"></script>
 </body>
 </html>

@@ -3,18 +3,106 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Reflection on ethical data use and user privacy in the Study Task Manager.">
   <title>Ethics &amp; Privacy | Study Task Manager</title>
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-  <!-- TODO: same header/navigation as index.html -->
+  <header class="site-header">
+    <a class="brand" href="../index.html">Study Task Manager</a>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="tasks.html">Tasks</a></li>
+        <li><a href="blog.html">Project Blog</a></li>
+        <li><a href="ethics.html" aria-current="page">Ethics &amp; Privacy</a></li>
+      </ul>
+    </nav>
+  </header>
 
   <main>
-    <!-- TODO: reflection on ethical data use and user privacy, with examples from this app -->
+    <h1>Ethics and privacy</h1>
+    <p class="meta">How this application handles personal information, and where its limits are.</p>
+
+    <section class="panel">
+      <h2>Data minimisation</h2>
+      <p>
+        The application only asks for what a task list actually needs: a title, a course, a due
+        date, a description and optional notes. It deliberately does not ask for a student number,
+        an address, a date of birth or any health information. Personal information that is never
+        collected cannot be leaked, so the safest design decision was to leave those fields out.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>Where the data is stored</h2>
+      <p>
+        Tasks are written to the browser's <code>localStorage</code> under the key
+        <code>studyTaskManager.tasks</code>. Nothing is sent to a server, because there is no backend
+        and no network request in the application. This means the data stays on the device the
+        student is using, and it is not shared with the university or any third party.
+      </p>
+      <p>
+        There are no analytics scripts, advertising trackers or third party fonts on any page, so
+        visiting the site does not create a profile of the user.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>Access control</h2>
+      <p>
+        The task list is hidden until the user signs in, which demonstrates how a login gate protects
+        a page. The implementation is honest about its limits: the account is hard coded in
+        <code>js/tasks.js</code> and the password is compared in the browser, so it is a
+        demonstration of the concept rather than real security. Anyone who opens the developer tools
+        could read the stored tasks.
+      </p>
+      <p>
+        In a real product this would need a server side login, hashed passwords, an expiring session
+        and HTTPS. Showing the honest limitation matters more than pretending the demo is secure.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>Input validation as a privacy control</h2>
+      <p>
+        Before a task is saved, the form rejects empty required fields, dates that do not exist and
+        due dates in the past. Validation is usually described as a way to stop bad data, but it also
+        reduces risk: it keeps unexpected values out of the stored list and forces every task to have
+        a known shape, which makes the data easier to audit and delete.
+      </p>
+      <p>
+        User supplied text is escaped before it is inserted into the table, so typing HTML or a
+        script into the description field is displayed as text instead of being executed.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>Deleting data</h2>
+      <p>
+        Deleting a task asks for confirmation first, then removes the record from storage
+        immediately. There is no hidden archive and no soft delete, so the user can actually get rid
+        of information instead of simply hiding it from view.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>If this became a real product</h2>
+      <ul class="feature-list">
+        <li>Move storage server side with encrypted connections and a proper session.</li>
+        <li>Store only hashed passwords and never log them.</li>
+        <li>Let the student export and permanently delete all of their data.</li>
+        <li>Retain tasks for a defined period rather than keeping them forever.</li>
+        <li>Explain in plain language what is collected, why, and for how long.</li>
+      </ul>
+    </section>
   </main>
 
-  <footer>
-    <!-- TODO: current date and time -->
+  <footer class="site-footer">
+    <p>&copy; 2026 Study Task Manager</p>
+    <p id="currentDateTime" class="datetime"></p>
   </footer>
+
+  <script src="../js/app.js"></script>
 </body>
 </html>
