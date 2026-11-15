@@ -138,10 +138,12 @@ if (!isRealDate) {
   errors.push("Due date is not a real calendar date.");
 }</code></pre>
 
-        <figure>
-          <img src="../docs/error-1.png" alt="Browser console showing the date validation bug before the fix">
-          <figcaption>Screenshot: the console output that showed 31 February being accepted.</figcaption>
-        </figure>
+        <p><strong>Console output while the bug was present:</strong></p>
+
+        <pre><code>// Testing 2026-02-31 in the due date field
+date value: "2026-02-31"
+new Date("2026-02-31") -&gt; Tue Mar 03 2026 00:00:00 GMT+1030
+validation result: accepted (no errors)</code></pre>
       </article>
 
       <article class="error-entry">
@@ -171,10 +173,10 @@ deleteButton.addEventListener("click", function () {
   deleteTask(task.id);
 });</code></pre>
 
-        <figure>
-          <img src="../docs/error-2.png" alt="Browser console showing deleteTask is not defined">
-          <figcaption>Screenshot: the console error that led to the fix.</figcaption>
-        </figure>
+        <p><strong>Console output while the bug was present:</strong></p>
+
+        <pre><code>Uncaught ReferenceError: deleteTask is not defined
+    at HTMLButtonElement.onclick (tasks.html:1:1)</code></pre>
       </article>
     </section>
 

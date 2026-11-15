@@ -110,12 +110,21 @@ ITS_3.1_StudyTask/
 
 ## Screenshots
 
-| Page | Screenshot |
-|---|---|
-| Home page | `docs/screenshot-home.png` |
-| Tasks page | `docs/screenshot-tasks.png` |
-| Project blog | `docs/screenshot-blog.png` |
-| Ethics page | `docs/screenshot-ethics.png` |
+### Home page
+
+![Home page](docs/screenshot-home.png)
+
+### Task management page
+
+![Task management page](docs/screenshot-tasks.png)
+
+### Project blog
+
+![Project blog](docs/screenshot-blog.png)
+
+### Ethics and privacy page
+
+![Ethics and privacy page](docs/screenshot-ethics.png)
 
 ---
 
